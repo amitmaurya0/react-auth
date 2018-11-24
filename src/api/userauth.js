@@ -14,4 +14,13 @@ export const login = (user) =>{
             return error;
       });
 }
+export const register = (user) =>{
+    return axios.post( urls.register , user)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+            return error;
+      });
+}
 

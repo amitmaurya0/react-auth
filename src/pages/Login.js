@@ -35,12 +35,15 @@ class Login extends Component {
     }
 
     onSubmit = (item) =>{
+        
+       
         let user = { email: item.email, password: item.password };
         this.setState({...this.state, error: '', loading: true});
         login(user).then( async res=>{
           if(res.status){
-                let user = { token: res.token, name: res.name, email: res.email };
+                let user = { token: res.token, name: {first:res.name, last: res.last}, email: res.email };
                 await localStorage.setItem('user', JSON.stringify(user));
+                this.props.add_user(user)
                 this.setState({...this.state, login: true});
           }else{
               this.setState({...this.state, error: res.msg, loading: false});

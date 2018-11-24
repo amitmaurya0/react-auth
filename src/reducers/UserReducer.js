@@ -1,8 +1,9 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { combineReducers } from 'redux';
 
 export const user = (state = {token:'', name:{first:'', last:''}, email: ''}, action)  => {
     switch (action.type) {
         case 'SET_USER_DETAIL':
+       
             return state={
                             ...state, 
                             token:action.payload.token, 
@@ -10,12 +11,21 @@ export const user = (state = {token:'', name:{first:'', last:''}, email: ''}, ac
                                 first: action.payload.name.first,
                                 last: action.payload.name.last,
                             },
-                            email: action.payload.email
+                            email: action.payload.email 
                            
                         };
         break;
         case 'REMOVE_USER_DETAIL':
-            return state;
+        return state={
+            ...state, 
+            token:'', 
+            name:{
+                first: '',
+                last: '',
+            },
+            email: ''
+           
+        };
         break;
         default:
             return state;

@@ -13,6 +13,12 @@ class Header extends Component {
         console.log(this.props.user);
         console.log('====================================');
     }
+
+    logout = () =>{
+        this.props.remove_user();
+        localStorage.removeItem('user');
+    }
+
     render() { 
         return (
             <header>
@@ -30,14 +36,27 @@ class Header extends Component {
                             <Link to="/about"> About </Link>
                         </NavItem>
                     </Nav>
-                    <Nav pullRight>
-                        <NavItem eventKey={1}>
-                            <Link to="/login"> Login </Link>
-                        </NavItem>
-                        <NavItem eventKey={2}>
-                            <Link to="/register"> Register </Link>
-                        </NavItem>
-                    </Nav>
+                    {
+                        !this.props.user.token ?
+                        <Nav pullRight>
+                            <NavItem eventKey={1}>
+                                <Link to="/login"> Login </Link>
+                            </NavItem>
+                            <NavItem eventKey={2}>
+                                <Link to="/register"> Register </Link>
+                            </NavItem>
+                        </Nav>
+                        :
+                        <Nav pullRight>
+                            <NavItem eventKey={1}>
+                                <Link to="/user/profile"> Profile </Link>
+                            </NavItem>
+                            <NavItem eventKey={2}>
+                                <a href="#" onClick={this.logout} >Logout</a>
+                            </NavItem>
+                        </Nav>
+                    }
+                    
                 </Navbar>
             </header>
         );
@@ -48,6 +67,8 @@ const mapStateToProps = (state, ownProps) => ({
     user: state.user
 });
   
+const mapDispatchToProps = { 
+    remove_user
+}
 
-
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Profile from './Profile';
-import Header from '../../components/base/Header';
+import { connect } from 'react-redux';
 
-export default class UserIndex extends Component {
+class UserIndex extends Component {
 
     constructor(props){
         super(props)
@@ -31,7 +31,7 @@ export default class UserIndex extends Component {
         if(this.state.loading){
             return <div>Loading</div>
         }
-        if(this.state.login){
+        if(this.props.user.token){
             return (
                 <Router>
                     <div>
@@ -46,3 +46,10 @@ export default class UserIndex extends Component {
         }
     }
 }
+
+const mapStateToProps = (state) => ({  
+    user: state.user
+});
+
+
+export default connect(mapStateToProps,)(UserIndex)

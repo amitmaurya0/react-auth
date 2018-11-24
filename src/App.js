@@ -3,10 +3,10 @@ import MainRoute from './routes/MainRoute';
 import { Provider } from 'react-redux';  
 import { store } from './store/store';
 
+
 class App extends Component {
   render() {
     return (
-
       <Provider store={store}>
         <MainRoute />
       </Provider>
@@ -14,5 +14,6 @@ class App extends Component {
     );
   } 
 }
+
 
 export default App;

@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "final-form": "^4.11.0",
+    "object-to-formdata": "^1.5.2",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
